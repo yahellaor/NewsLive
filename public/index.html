@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="jDk1s6N-IOBTrNM4PV6WqMvZVyTrDHe8nv0tHPHHvaQ" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Renan News</title>
+
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/y6Zos1q.png">
+    <link rel="apple-touch-icon" href="https://i.imgur.com/y6Zos1q.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>News</h1>
+        <div id="refresh-indicator"></div>
+    </header>
+
+    <nav id="sources-nav">
+        <div id="buttons-container">
+            <label data-source="bbc">
+                <input type="checkbox" id="bbc-checkbox" name="bbc" onchange="toggleSourceSelection('bbc', 'BBC News')">
+                <img src="https://c.files.bbci.co.uk/16B26/production/_96566929_bbc_wn_rgb.png" alt="BBC News">
+                <span class="source-label">BBC</span>
+            </label>
+            <label data-source="nyt">
+                <input type="checkbox" id="nyt-checkbox" name="nyt" onchange="toggleSourceSelection('nyt', 'NYT News')">
+                <img src="https://cdn0.iconfinder.com/data/icons/circle-icons/512/new_york_times.png" alt="NYT News">
+                <span class="source-label">NYT</span>
+            </label>
+            <label data-source="ynet">
+                <input type="checkbox" id="ynet-checkbox" name="ynet" onchange="toggleSourceSelection('ynet', 'Ynet News')">
+                <img src="https://ynetads-10fd1.firebaseapp.com/assets/client/imgs/logo-ynet.png" alt="Ynet News">
+                <span class="source-label">Ynet</span>
+            </label>
+            <label data-source="maariv">
+                <input type="checkbox" id="maariv-checkbox" name="maariv" onchange="toggleSourceSelection('maariv', 'Maariv News')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Maariv_Online_Logo.png" alt="Maariv News">
+                <span class="source-label">Maariv</span>
+            </label>
+            <label data-source="n12">
+                <input type="checkbox" id="n12-checkbox" name="n12" onchange="toggleSourceSelection('n12', 'N12 News')">
+                <img src="https://www.ophirlaw.com/wp-content/uploads/2022/07/Tinder-Swindler.png" alt="N12 News">
+                <span class="source-label">N12</span>
+            </label>
+            <label data-source="rotter">
+                <input type="checkbox" id="rotter-checkbox" name="rotter" onchange="toggleSourceSelection('rotter', 'Rotter News')">
+                <img src="https://i.imgur.com/W9mLeYa.png" alt="Rotter News">
+                <span class="source-label">Rotter</span>
+            </label>
+            <label data-source="walla">
+                <input type="checkbox" id="walla-checkbox" name="walla" onchange="toggleSourceSelection('walla', 'Walla News')">
+                <img src="https://i.imgur.com/pNH2rCR.png" alt="Walla News">
+                <span class="source-label">Walla</span>
+            </label>
+            <label data-source="haaretz">
+                <input type="checkbox" id="haaretz-checkbox" name="haaretz" onchange="toggleSourceSelection('haaretz', 'Haaretz News')">
+                <img src="https://i.imgur.com/WMwYtrz.png" alt="Haaretz News">
+                <span class="source-label">Haaretz</span>
+            </label>
+            <label class="reload-btn" title="Refresh All News">
+                <img src="https://i.imgur.com/H65siyA.png" alt="Fetch All News">
+            </label>
+        </div>
+    </nav>
+
+    <div class="app-toolbar">
+        <div id="search-container">
+            <span class="search-icon-label">&#x1F50D;</span>
+            <input type="text" id="search-bar" placeholder="Search news..." />
+            <button id="search-clear" onclick="clearSearch()" title="Clear search">&times;</button>
+        </div>
+
+        <div class="toolbar-controls">
+            <div id="mode-switcher">
+                <button id="list-mode-btn" onclick="setDisplayMode('list')" class="active">
+                    <span>List</span>
+                </button>
+                <button id="card-mode-btn" onclick="setDisplayMode('card')">
+                    <span>Cards</span>
+                </button>
+            </div>
+
+            <div class="font-controls">
+                <button id="decrease-font" onclick="adjustFontSize(-1)" title="Decrease font size">A-</button>
+                <button id="increase-font" onclick="adjustFontSize(1)" title="Increase font size">A+</button>
+            </div>
+
+            <div class="refresh-controls">
+                <button id="refresh-button" onclick="refreshNews(true)" title="Refresh all news">
+                    <span class="refresh-icon">&#8635;</span>
+                </button>
+                <button id="auto-refresh-toggle" onclick="toggleAutoRefresh()" title="Toggle auto-refresh every 30 seconds" class="auto-refresh-off">
+                    <span class="auto-refresh-icon">&#9201;</span>
+                </button>
+            </div>
+
+            <span class="news-count" id="news-count">0 articles</span>
+            <p id="last-updated" class="idle">
+                <span class="status-spinner" aria-hidden="true"></span><span class="status-label">Last updated --:--:--</span>
+            </p>
+        </div>
+    </div>
+
+    <div id="error-container"></div>
+
+    <div id="news-container" dir="ltr"></div>
+
+    <!-- Loading is now handled by skeleton placeholders inside news-container -->
+
+    <footer>
+        <p>Contact: <a href="mailto:renabazinin2@gmail.com">renabazinin2@gmail.com</a></p>
+    </footer>
+
+    <button id="scroll-to-top" onclick="scrollToTop()" title="Scroll to top">&#8593;</button>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
