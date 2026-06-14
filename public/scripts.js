@@ -1,6 +1,8 @@
 // ===== Constants =====
 
-const API_BASE = 'https://allnews-server-1018085155010.europe-west3.run.app';
+const API_BASE = 'https://newslive-btel.onrender.com';
+
+// https://allnews-server-1018085155010.europe-west3.run.app
 
 const HEBREW_SOURCES = new Set(['ynet', 'maariv', 'n12', 'rotter', 'walla', 'haaretz']);
 
