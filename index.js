@@ -17,59 +17,74 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/bbc', async (req, res) => {
-    try {
-        const newsItems = await fetchBBCNewsRSS();
-        res.json(newsItems);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch news' });
-    }
-});
-
-app.get('/nyt', async (req, res) => {
-    try {
-        const newsItems = await fetchNYTNewsRSS();
-        res.json(newsItems);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch news' });
-    }
-});
-
 app.get('/ynet', async (req, res) => {
-    const news = await fetchYnetNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchYnetNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /ynet endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from ynet' });
+    }
 });
-
 
 app.get('/maariv', async (req, res) => {
-    const news = await fetchMaarivNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchMaarivNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /maariv endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from maariv' });
+    }
 });
 
-
 app.get('/n12', async (req, res) => {
-    const news = await fetchN12NewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchN12NewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /n12 endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from n12' });
+    }
 });
 
 app.get('/rotter', async (req, res) => {
-    const news = await fetchRotterNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchRotterNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /rotter endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from rotter' });
+    }
 });
 
 app.get('/walla', async (req, res) => {
-    const news = await fetchWallaNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchWallaNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /walla endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from walla' });
+    }
 });
 
 app.get('/calcalist', async (req, res) => {
-    const news = await fetchCalcalistNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchCalcalistNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /calcalist endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from calcalist' });
+    }
 });
 
 app.get('/haaretz', async (req, res) => {
-    const news = await fetchHaaretzNewsRSS();
-    res.json(news);
+    try {
+        const news = await fetchHaaretzNewsRSS();
+        res.json(news);
+    } catch (error) {
+        console.error('Error in /haaretz endpoint:', error.message);
+        res.status(500).json({ error: 'Failed to fetch news from haaretz' });
+    }
 });
 
 app.get('/all-news', async (req, res) => {
